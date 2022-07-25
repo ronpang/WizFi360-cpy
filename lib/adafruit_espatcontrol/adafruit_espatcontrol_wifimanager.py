@@ -128,7 +128,7 @@ class ESPAT_WiFiManager:
         if Mode == "MQTT":
             cmd_mode = "0"
             port = "1883"
-        elif Mode == "MSSL":
+        elif Mode == "MQTTS":
             cmd_mode = "1"
             port = "8883"
         else:
