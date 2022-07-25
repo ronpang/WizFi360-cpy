@@ -23,9 +23,6 @@ TX = board.GP4
 resetpin = DigitalInOut(board.GP20)
 rtspin = False
 uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
-#esp_boot = DigitalInOut(board.WIFI_MODE)
-#esp_boot.direction = Direction.OUTPUT
-#esp_boot.value = True
 
 print("ESP AT commands")
 # For Boards that do not have an rtspin like challenger_rp2040_wifi set rtspin to False.
@@ -55,11 +52,11 @@ while True:
             print("Connected to AT software version ", esp.version)
             print("IP address ", esp.local_ip)
             first_pass = False
-        esp.socket_connect("TCP","10.0.1.75",5000)
-        esp.socket_send(str(counter).encode())
+        esp.socket_connect("TCP","10.0.1.75",5000) #connect to a PC - IP address: 10.0.1.75, Port:5000
+        esp.socket_send(str(counter).encode()) #send data
         counter += 1
-        esp.socket_receive(1)
-        esp.socket_disconnect()
+        esp.socket_receive(1) #using receive function to collect data
+        esp.socket_disconnect() #disconnect with the server
         time.sleep(1)
     except (ValueError, RuntimeError, adafruit_espatcontrol.OKError) as e:
         print("Failed to get data, retrying\n", e)
