@@ -42,16 +42,13 @@ esp = adafruit_espatcontrol.ESP_ATcontrol(
 )
 wifi = adafruit_espatcontrol_wifimanager.ESPAT_WiFiManager(esp, secrets, status_light,attempts=5)
 
-
 counter = 0
 
-
-
 while True:
-    wifi.IO_Con("test","test","MQTT")
-    wifi.MQTT_pub(str(counter))
-    data = wifi.MQTT_sub()
-    print (data)
-    wifi.MQTT_disconnect()
+    wifi.IO_Con("test","test","MQTT") #connect to adafruit io
+    wifi.MQTT_pub(str(counter)) #publish data
+    data = wifi.MQTT_sub() #collect subscribed channel data
+    print (data) #print out the result
+    wifi.MQTT_disconnect() #disconnect with adafruit io
     counter += 1   
     time.sleep(15)
