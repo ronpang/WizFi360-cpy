@@ -121,7 +121,7 @@ class ESPAT_WiFiManager:
         Connnect to a MQTT server
         :param str Pub_topic: Publish channel topic name (for IO_topics)
         :param str Sub_topic: Subscribe channel topic name (for IO_topics)
-        :param str mode: MQTT mode or MSSL mode (MQTT in SSL)
+        :param str mode: MQTT mode or MQTTs mode (MQTT in SSL)
         """
         self.IO_set()
         self.IO_topics(Pub_topic,Sub_topic)
@@ -154,7 +154,7 @@ class ESPAT_WiFiManager:
     def MQTT_pub(self, data: str) -> None:
         """
         Publish the data to MQTT server
-        
+        :param str data: the data that you need to send to the MQTT server
         """
         cmd = (
             'AT+MQTTPUB="'
@@ -162,10 +162,11 @@ class ESPAT_WiFiManager:
             + '"'
             )
         self._esp.at_response(cmd, timeout=10, retries=3)
+        
     def MQTT_sub (self, timeout: int = 5) -> None:
         """
         Collect data from MQTT server
-        
+        :param int timeout: Retry times for collecting subscribe data
         """
         stamp = time.monotonic()
         result = b''
