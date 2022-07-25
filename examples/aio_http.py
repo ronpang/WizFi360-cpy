@@ -41,7 +41,6 @@ esp = adafruit_espatcontrol.ESP_ATcontrol(
 )
 wifi = adafruit_espatcontrol_wifimanager.ESPAT_WiFiManager(esp, secrets, status_light)
 
-
 counter = 0
 
 while True:
