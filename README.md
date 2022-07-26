@@ -26,13 +26,13 @@ By using WIZnet Ethernet HAT with Raspberry Pi PICO, it required simple coding t
 1. secret.py (from examples) -> Please modified the information to allow WizFi360 to connect your personal AP and adafruit IO.
 2. Example codes 
 
-### How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
+## 🤖 Setup
+### Step 1: How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
 🟥Youtube: [Linux install method][link-linux install]
 
 🟥Youtube: [Window install method][link-window install]
 
-## 🤖 Setup
-### Step 1: Modified your secret.py and put the file inside the Pico flash
+### Step 2: Modified your secret.py and put the file inside the Pico flash
 It is used for saving your AP information and Adafruit IO information to allow WizFi360 to connect.
 ```python
 secrets = {
@@ -44,14 +44,14 @@ secrets = {
     "aio_key": "abcdefghij0123456789", #adafruit IO 
 }
 ```
-### Step 2: Add the libraries to your lib section
+### Step 3: Add the libraries to your lib section
 It is required to add libraries to the folder lib to allow the codes could run.
 ![link-lib_image]
 
 ### Step 4: Put the example codes to flash
 Draging the examples codes to the flash inside the pico board, it should run the software easily.
 
-### Step 3: Setting the GPIO PINS
+### Step 5: Setting the GPIO PINS
 It is required to modify the GPIO PIN settings to allow the RP2040 coould communicate with WizFi360
 ```python
 RX = board.GP5 #TXD1 pin for WizFi360
