@@ -1,6 +1,8 @@
 # WizFi360-EVB-Pico in Circuitpython (WizFi360 + RP2040)
 These code is based on Adafruit's circuitpython ESP AT control to modified. 
 
+WizFi360 Firmware version: 1.1.1.7
+
 If you are interested on the codes and commands, please refer to the links below.
 
 1.[ESP AT control - circuitpython][link-ESP_cpy]
