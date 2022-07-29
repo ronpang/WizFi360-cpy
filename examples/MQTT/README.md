@@ -37,9 +37,8 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 ```
 
 ## 🔰MQTT conncection setup
-1. Basic setup - please refer to [WizFi360 Basic Setup][link-readme]
-2. Required files: [aio.py][link-aio], [Secret.py][link-secret]
-3. Required commands:
+1. Required files: [aio.py][link-aio], [Secret.py][link-secret]
+2. Required commands:
 ```python
 # Connect to adafruit io - it used the secret from secret.py
 # Pubish topic: test , Subscribe topic: test , Mode: MQTT / MQTTS
@@ -74,7 +73,7 @@ The results has been covered in different colors.
 
 ![link-adadfruit_img]
 
-[link-readme]: https://github.com/ronpang/WizFi360-cpy
+
 [link-aio]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/aio.py
 [link-secret]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/secrets.py
 [link-linux install]: https://www.youtube.com/watch?v=onBkPkaqDnk&list=PL846hFPMqg3h4HpTVO8cPPHZnJIRA4I2p&index=3
