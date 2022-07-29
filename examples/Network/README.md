@@ -3,7 +3,7 @@ This section includes codings as follow:
 1. TCP client: Communicate with a TCP server through
 2. Ping: Pinging the AP to test the connection is work
 
-## Tcp conncection setup
+## 🔰Tcp conncection setup
 1. Basic setup - please refer to [WizFi360 Basic Setup][link-readme]
 2. Required files: [TCP Client.py][link-tcp], [Secret.py][link-secret]
 3. Required commands:
@@ -17,7 +17,7 @@ esp.socket_receive(1)
 #4 Disconnect with the server
 esp.socket_disconnect()
 ```
-## Ping
+## 💻Ping
 1. Basic setup - please refer to [WizFi360 Basic Setup][link-readme]
 2. Required files: [Ping.py][link-ping], [Secret.py][link-secret]
 3. Required commands:
