@@ -19,11 +19,11 @@ By using WIZnet Ethernet HAT with Raspberry Pi PICO, it required simple coding t
 2. [Adafruit circuit python bundle][link-adafruit] - Use the latest version from adafruit bundle page [ESP AT control or download from this github]
 
 ### Required Libraries from adafruit bundle:
-1. adafruit_espatcontrol library or this library
+1. adafruit_espatcontrol library or [this library][link-library]
 2. adafruit_request
 
 ### Required codes to run example codes
-1. secret.py (from examples) -> Please modified the information to allow WizFi360 to connect your personal AP and adafruit IO.
+1. [Secret.py][link-secret] -> Please modified the information to allow WizFi360 to connect your personal AP and adafruit IO.
 2. Example codes 
 
 ### Programming and debug software 
@@ -71,6 +71,7 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 
 
 
+[link-library]: https://github.com/ronpang/WizFi360-cpy/tree/main/lib/adafruit_espatcontrol
 [link-Thonny]: https://thonny.org/
 [link-ESP_cpy]: https://github.com/adafruit/Adafruit_CircuitPython_ESP_ATcontrol
 [link-AT commands]: https://docs.wiznet.io/img/products/wizfi360/wizfi360ds/wizfi360_atset_v1118_e.pdf
@@ -84,3 +85,4 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 [link-Adafrui_io_http]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/http/aio_http.py
 [link-ping]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/Network/ping.py
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
+[link-secret]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/secrets.py
