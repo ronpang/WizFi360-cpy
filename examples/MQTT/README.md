@@ -53,6 +53,7 @@ data = wifi.MQTT_sub() #collect subscribed channel data
 # Disconnect with adafruit io 
 wifi.MQTT_disconnect()
 ```
+## Results
 
 
 [link-readme]: https://github.com/ronpang/WizFi360-cpy
