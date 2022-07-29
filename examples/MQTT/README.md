@@ -19,5 +19,7 @@ data = wifi.MQTT_sub() #collect subscribed channel data
 wifi.MQTT_disconnect()
 ```
 
+
+[link-readme]: https://github.com/ronpang/WizFi360-cpy
 [link-aio]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/aio.py
 [link-secret]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/secrets.py
