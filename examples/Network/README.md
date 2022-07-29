@@ -10,7 +10,7 @@ This section includes codings as follow:
 ```python
 #1.Connect to a PC - IP address: 10.0.1.75, Port:5000
 esp.socket_connect("TCP","10.0.1.75",5000) 
-#2.Send data, str: data -> it the data wanted to send out.
+#2.Send data, data -> it the data wanted to send out.
 esp.socket_send(str(data).encode())
 #3 Receive function to collect data
 esp.socket_receive(1)
