@@ -1,12 +1,20 @@
-# Network
-Using WizFi360 to create a simple TCP connection. 
+# Network Examples
+This section includes codings as follow:
+1. TCP client: Communicate with a TCP server through
+2. Ping: Pinging the AP to test the connection is work
 
 # Tcp conncection setup
 1. Basic setup - please refer to [readme.md][link-readme]
 2. Required commands:
 ```python
-
-
+#1.Connect to a PC - IP address: 10.0.1.75, Port:5000
+esp.socket_connect("TCP","10.0.1.75",5000) 
+#2.Send data
+esp.socket_send(str(counter).encode())
+#3 Receive function to collect data
+esp.socket_receive(1)
+#4 Disconnect with the server
+esp.socket_disconnect()
 ```
 
 
