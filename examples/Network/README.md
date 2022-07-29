@@ -3,6 +3,10 @@ This section includes codings as follow:
 1. [TCP client](#TCP) : Communicate with a TCP server through
 2. [Ping](#Ping): Pinging the AP to test the connection is work
 
+### Extra Software tools: 
+
+[Hercules][link-Hercules] - Create a TCP server to communicate with the PICO 
+
 ## 🤖 Basic Setup
 ### Step 1: How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
 🟥Youtube: [Linux install method][link-linux install]
@@ -53,6 +57,21 @@ esp.socket_receive(1)
 esp.socket_disconnect()
 ```
 
+## ☑️TCP results
+### Thonny (in debug mode)
+It is required to use debug mode to show the progress of the TCP communication
+
+The following image shows the one of the TCP connection (From connect -> send data -> receive data  -> disconnect)
+
+![link-tcp_thonny]
+
+### Hercules
+The Hercules software will create a TCP server to allow PICO to connect.
+
+It receive counting data from the module and sent "disconnect" ( 10 bytes of data) to WizFi360
+
+![link-tcp_hercules]
+
 <a name="Ping"></a>
 ## 💻Ping
 1. Basic setup - please refer to [WizFi360 Basic Setup][link-readme]
@@ -63,6 +82,12 @@ esp.socket_disconnect()
 print(esp.ping("8.8.8.8"))
 ```
 
+## ☑️Ping Result
+The following result shows the Pico has ping 4 times with the AP
+
+The result is showing in debug mode.
+
+![link-ping_thonny]
 
 [link-readme]: https://github.com/ronpang/WizFi360-cpy
 [link-tcp]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/Network/TCP%20client.py
@@ -71,3 +96,7 @@ print(esp.ping("8.8.8.8"))
 [link-linux install]: https://www.youtube.com/watch?v=onBkPkaqDnk&list=PL846hFPMqg3h4HpTVO8cPPHZnJIRA4I2p&index=3
 [link-window install]: https://www.youtube.com/watch?v=e_f9p-_JWZw&t=374s
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
+[link-tcp_thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20(updated)%20-%20tcp.PNG
+[link-Hercules]: https://www.hw-group.com/software/hercules-setup-utility
+[link-tcp_hercules]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/Hercules%20result%20-%20wizfi360%20-%20tcp.PNG
+[link-ping_thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20Ping.PNG
