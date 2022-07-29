@@ -26,7 +26,7 @@ By using WIZnet Ethernet HAT with Raspberry Pi PICO, it required simple coding t
 1. secret.py (from examples) -> Please modified the information to allow WizFi360 to connect your personal AP and adafruit IO.
 2. Example codes 
 
-## 🤖 Setup
+## 🤖 Basic Setup
 ### Step 1: How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
 🟥Youtube: [Linux install method][link-linux install]
 
