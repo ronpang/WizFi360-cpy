@@ -26,6 +26,8 @@ By using WIZnet Ethernet HAT with Raspberry Pi PICO, it required simple coding t
 1. secret.py (from examples) -> Please modified the information to allow WizFi360 to connect your personal AP and adafruit IO.
 2. Example codes 
 
+### Programming and debug software 
+1. [Thonny][link-Thonny]
 ## 🤖 Basic Setup
 ### Step 1: How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
 🟥Youtube: [Linux install method][link-linux install]
@@ -69,6 +71,7 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 
 
 
+[link-Thonny]: https://thonny.org/
 [link-ESP_cpy]: https://github.com/adafruit/Adafruit_CircuitPython_ESP_ATcontrol
 [link-AT commands]: https://docs.wiznet.io/img/products/wizfi360/wizfi360ds/wizfi360_atset_v1118_e.pdf
 [link-AT comparison]: https://docs.wiznet.io/img/products/wizfi360/wizfi360ds/wizfi360_atcp_v102.pdf
