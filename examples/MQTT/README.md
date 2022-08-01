@@ -2,7 +2,7 @@
 This is a exmaple using WIZnet's WizFi360 MQTT commands to communicate adafruit IO.
 
 ## Getting start for Adafruit IO
-For applying a adafruit account and how to use adafruit accounts, please refer to [Get start adafruit IO][link-get start]
+For applying an Adafruit account and how to use adafruit accounts, please refer to [Get start adafruit IO][link-get start]
 
 ## 🤖 Basic Setup
 ### Step 1: How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
