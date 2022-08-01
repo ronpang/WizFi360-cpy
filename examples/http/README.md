@@ -37,9 +37,8 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 ```
 
 ## 🔰MQTT conncection setup
-1. Basic setup - please refer to [WizFi360 Basic Setup][link-readme]
-2. Required files: [aio.py][link-aio_http], [Secret.py][link-secret]
-3. Required commands:
+1. Required files: [aio.py][link-aio_http], [Secret.py][link-secret]
+2. Required commands:
 ```python
 # Using counter's value to send to adafruit io
 data = counter
