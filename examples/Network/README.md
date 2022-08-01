@@ -74,9 +74,8 @@ It receive counting data from the module and sent "disconnect" ( 10 bytes of dat
 
 <a name="Ping"></a>
 ## 💻Ping
-1. Basic setup - please refer to [WizFi360 Basic Setup][link-readme]
-2. Required files: [Ping.py][link-ping], [Secret.py][link-secret]
-3. Required commands:
+1. Required files: [Ping.py][link-ping], [Secret.py][link-secret]
+2. Required commands:
 ```python
 #Print out the pinging result
 print(esp.ping("8.8.8.8"))
@@ -89,7 +88,7 @@ The result is showing in debug mode.
 
 ![link-ping_thonny]
 
-[link-readme]: https://github.com/ronpang/WizFi360-cpy
+
 [link-tcp]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/Network/TCP%20client.py
 [link-secret]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/secrets.py
 [link-ping]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/Network/ping.py
