@@ -5,6 +5,9 @@ The code is totally the same as ESP AT control.
 
 If it is using SSL to post the information , it takes a longer response.
 
+## Getting start for Adafruit IO
+For applying a adafruit account and how to use adafruit accounts, please refer to [Get start adafruit IO][link-get start]
+
 ## 🤖 Basic Setup
 ### Step 1: How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
 🟥Youtube: [Linux install method][link-linux install]
@@ -86,3 +89,4 @@ The result from adafruit io.
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
 [link-thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20HTTP.PNG
 [link-adafruitio]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/adafruit%20io%20recevied%20result%20-%20wizfi360%20-%20http.PNG
+[link-get start]: https://github.com/ronpang/RP2040-HAT-CircuitPython/blob/master/examples/Adafruit_IO/Getting%20Start%20Adafruit%20IO.md
