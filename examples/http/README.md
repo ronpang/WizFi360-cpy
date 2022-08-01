@@ -1,6 +1,10 @@
 # HTTP example
 This is a example code for HTTP to connect with adafruit io.
 
+The code is totally the same as ESP AT control. 
+
+If it is using SSL to post the information , it takes a longer response.
+
 ## 🤖 Basic Setup
 ### Step 1: How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
 🟥Youtube: [Linux install method][link-linux install]
@@ -63,7 +67,16 @@ response.close()
 # Adding counter value
 counter = counter + 1 
 ```
+## ☑️Results
+### Thonny 
+The following are the results used HTTP post to post information to the adafruiit IO
 
+![link-thonny]
+
+### Adafruit IO 
+The result from adafruit io.
+
+![link-adafruitio]
 
 [link-readme]: https://github.com/ronpang/WizFi360-cpy
 [link-aio_http]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/http/aio_http.py
@@ -71,3 +84,5 @@ counter = counter + 1
 [link-linux install]: https://www.youtube.com/watch?v=onBkPkaqDnk&list=PL846hFPMqg3h4HpTVO8cPPHZnJIRA4I2p&index=3
 [link-window install]: https://www.youtube.com/watch?v=e_f9p-_JWZw&t=374s
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
+[link-thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20HTTP.PNG
+[link-adafruitio]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/adafruit%20io%20recevied%20result%20-%20wizfi360%20-%20http.PNG
