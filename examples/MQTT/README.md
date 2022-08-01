@@ -67,6 +67,8 @@ The results has been covered in different colors.
 ![link-thonny_img]
 
 ### Adafruit IO 
+The results from Adafruit IO
+
 🔵Blue: Adafruit IO username
 
 🔴Red: Results
