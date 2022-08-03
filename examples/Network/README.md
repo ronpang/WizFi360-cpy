@@ -47,28 +47,26 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 1. Required files: [TCP Client.py][link-tcp], [Secret.py][link-secret]
 2. Required commands:
 ```python
-#1.Connect to a PC - IP address: 10.0.1.75, Port:5000
-esp.socket_connect("TCP","10.0.1.75",5000) 
-#2.Send data, data -> it the data wanted to send out.
-esp.socket_send(str(data).encode())
-#3 Receive function to collect data
-esp.socket_receive(1)
-#4 Disconnect with the server
-esp.socket_disconnect()
+# After WizFi360 connected to a AP (Router)
+esp.socket_connect("TCP",Dest_IP,Dest_PORT) #connect to a PC - Dest_IP: 10.0.1.74, Dest_PORT:5000
+while True:
+    data = esp.socket_receive(1) #received data from PC side (TCP server)
+    if data: 
+        print(data) #print the data on serial 
+        esp.socket_send(data) # return the data back to the PC (TCP server)
+
 ```
 
 ## ☑️TCP results
-### Thonny (in debug mode)
-It is required to use debug mode to show the progress of the TCP communication
-
-The following image shows the one of the TCP connection (From connect -> send data -> receive data  -> disconnect)
+### Thonny 
+It will show the received message from TCP server (PC)
 
 ![link-tcp_thonny]
 
 ### Hercules
 The Hercules software will create a TCP server to allow PICO to connect.
 
-It receive counting data from the module and sent "disconnect" ( 10 bytes of data) to WizFi360
+It received loopback data from the module and sent back the original message to WizFi360
 
 ![link-tcp_hercules]
 
@@ -95,7 +93,7 @@ The result is showing in debug mode.
 [link-linux install]: https://www.youtube.com/watch?v=onBkPkaqDnk&list=PL846hFPMqg3h4HpTVO8cPPHZnJIRA4I2p&index=3
 [link-window install]: https://www.youtube.com/watch?v=e_f9p-_JWZw&t=374s
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
-[link-tcp_thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20(updated)%20-%20tcp.PNG
+[link-tcp_thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360-%20tcp%20-%20new.PNG
 [link-Hercules]: https://www.hw-group.com/software/hercules-setup-utility
-[link-tcp_hercules]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/Hercules%20result%20-%20wizfi360%20-%20tcp.PNG
+[link-tcp_hercules]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/Hercules%20result%20-%20wizfi360%20-%20tcp%20-new.PNG
 [link-ping_thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20Ping.PNG
