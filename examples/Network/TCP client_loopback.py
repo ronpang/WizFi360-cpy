@@ -18,17 +18,18 @@ except ImportError:
 debugflag = False
 #LED = board.GP25
 
-RX = board.GP5
-TX = board.GP4
-resetpin = DigitalInOut(board.GP20)
-rtspin = False
-uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
-#edit host and port to match server
+# Pins setup with WizFi360 through UART connection
+RX = board.GP5 #TX pin for WizFi360-EVB-PICO
+TX = board.GP4 #RX pin for WizFi360-EVB-PICO
+resetpin = DigitalInOut(board.GP20) #Reset pin for WizFi360-EVB-PICO
+rtspin = False #RTS pin - it is not required
+uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048) #Serial settings
+#edit host IP and port number to match server
 Dest_IP = "10.0.1.74"
 Dest_PORT= 5000
 
-print("ESP AT commands")
-# For Boards that do not have an rtspin like challenger_rp2040_wifi set rtspin to False.
+print("ESP AT commands") 
+# For Boards that do not have an rtspin like WizFi360-EVB-PICO set rtspin to False.
 esp = adafruit_espatcontrol.ESP_ATcontrol(
     uart, 115200, reset_pin=resetpin, rts_pin=rtspin, debug=debugflag
 )
@@ -42,8 +43,6 @@ print("Checking connection")
 
 while not esp.is_connected:
   try:
-    # Some ESP do not return OK on AP Scan.
-    # See https://github.com/adafruit/Adafruit_CircuitPython_ESP_ATcontrol/issues/48
     # Comment out the next 3 lines if you get a No OK response to AT+CWLAP
     print("Scanning for AP's")
     for ap in esp.scan_APs():
