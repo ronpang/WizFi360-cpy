@@ -21,7 +21,7 @@ debugflag = False
 RX = board.GP5 #TX pin for WizFi360-EVB-PICO
 TX = board.GP4 #RX pin for WizFi360-EVB-PICO
 resetpin = DigitalInOut(board.GP20) #Reset pin for WizFi360-EVB-PICO
-rtspin = False #RTS pin - it is not required
+rtspin = False #RTS pin
 uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048) #Serial settings
 #edit host IP and port number to match server
 Dest_IP = "10.0.1.74"
