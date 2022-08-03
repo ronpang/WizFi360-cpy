@@ -25,29 +25,29 @@ except ImportError:
 
 # Debug Level
 # Change the Debug Flag if you have issues with AT commands
-debugflag = True
+debugflag = False
 
-
-RX = board.GP5
-TX = board.GP4
-resetpin = DigitalInOut(board.GP20)
-rtspin = False
-uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
+# Pins setup with WizFi360 through UART connection
+RX = board.GP5 #TX pin for WizFi360-EVB-PICO
+TX = board.GP4 #RX pin for WizFi360-EVB-PICO
+resetpin = DigitalInOut(board.GP20) #Reset pin for WizFi360-EVB-PICO
+rtspin = False #RTS pin
+uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048) #Serial settings
 status_light = None
 
-
 print("ESP AT commands")
+# For Boards that do not have an rtspin like WizFi360-EVB-PICO set rtspin to False.
 esp = adafruit_espatcontrol.ESP_ATcontrol(
     uart, 115200, reset_pin=resetpin, rts_pin=rtspin, debug=debugflag
 )
-wifi = adafruit_espatcontrol_wifimanager.ESPAT_WiFiManager(esp, secrets, status_light,attempts=5)
+wifi = adafruit_espatcontrol_wifimanager.ESPAT_WiFiManager(esp, secrets, status_light,attempts=5) #Class that handles HTTPs and MQTT (more information from lib)
 
 counter = 0
 
 while True:
-    wifi.IO_Con("test","test","MQTT") #connect to adafruit io
-    wifi.MQTT_pub(str(counter)) #publish data
-    data = wifi.MQTT_sub() #collect subscribed channel data
+    wifi.IO_Con("test","test","MQTT") #connect to adafruit io - publish topic name = "test", subscribe topic name = "test", protcol = MQTT
+    wifi.MQTT_pub(str(counter)) #publish data to "test"
+    data = wifi.MQTT_sub() #collect subscribed channel data from "test"
     print (data) #print out the result
     wifi.MQTT_disconnect() #disconnect with adafruit io
     counter += 1   
