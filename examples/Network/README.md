@@ -1,6 +1,6 @@
 # Network Examples
 This section includes codings as follow:
-1. [TCP client](#TCP) : Communicate with a TCP server through
+1. [TCP client](#TCP) : TCP client loop back test
 2. [Ping](#Ping): Pinging the AP to test the connection is work
 
 ### Extra Software tools: 
