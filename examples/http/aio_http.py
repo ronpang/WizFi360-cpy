@@ -53,13 +53,13 @@ while True:
         payload = {"value": data} # Json format
         # HTTP Post method to Adafruit IO
         response = wifi.post(
-            "https://io.adafruit.com/api/v2/"
-            + secrets["aio_username"]
+            "https://io.adafruit.com/api/v2/" #address to adafruit io
+            + secrets["aio_username"] #input adafruit io name for "secret"
             + "/feeds/"
-            + feed
+            + feed #feed = "test"
             + "/data",
-            json=payload,
-            headers={"X-AIO-KEY": secrets["aio_key"]},
+            json=payload, # counter 
+            headers={"X-AIO-KEY": secrets["aio_key"]}, #input adafruit io key from "secret"
         )
         print(response.json()) #send data and print the data that you sent
         response.close() #close the connection
