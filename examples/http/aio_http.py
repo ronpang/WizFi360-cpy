@@ -28,14 +28,16 @@ except ImportError:
 # Change the Debug Flag if you have issues with AT commands
 debugflag = False
 
-RX = board.GP5
-TX = board.GP4
-resetpin = DigitalInOut(board.GP20)
-rtspin = False
-uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
+# Pins setup with WizFi360 through UART connection
+RX = board.GP5 #TX pin for WizFi360-EVB-PICO
+TX = board.GP4 #RX pin for WizFi360-EVB-PICO
+resetpin = DigitalInOut(board.GP20) #Reset pin for WizFi360-EVB-PICO
+rtspin = False #RTS pin
+uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048) #Serial settings
 status_light = None
 
 print("ESP AT commands")
+# For Boards that do not have an rtspin like WizFi360-EVB-PICO set rtspin to False.
 esp = adafruit_espatcontrol.ESP_ATcontrol(
     uart, 115200, reset_pin=resetpin, rts_pin=rtspin, debug=debugflag
 )
@@ -45,10 +47,11 @@ counter = 0
 
 while True:
     try:
-        print("Posting data...", end="")
-        data = counter
-        feed = "test"
-        payload = {"value": data}
+        print("Posting data...", end="") 
+        data = counter #counter result = input data
+        feed = "test" # Adafruit IO feed, the name on adafruit io needs to be "test"
+        payload = {"value": data} # Json format
+        # HTTP Post method to Adafruit IO
         response = wifi.post(
             "https://io.adafruit.com/api/v2/"
             + secrets["aio_username"]
@@ -58,8 +61,8 @@ while True:
             json=payload,
             headers={"X-AIO-KEY": secrets["aio_key"]},
         )
-        print(response.json())
-        response.close()
+        print(response.json()) #send data and print the data that you sent
+        response.close() #close the connection
         counter = counter + 1
         print("OK")
     except (ValueError, RuntimeError, adafruit_espatcontrol.OKError) as e:
