@@ -16,7 +16,6 @@ except ImportError:
 # Debug Level
 # Change the Debug Flag if you have issues with AT commands
 debugflag = False
-#LED = board.GP25
 
 # Pins setup with WizFi360 through UART connection
 RX = board.GP5 #TX pin for WizFi360-EVB-PICO
