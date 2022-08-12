@@ -80,7 +80,7 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 [link-adafruit]: https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20211208
 [link-linux install]: https://www.youtube.com/watch?v=onBkPkaqDnk&list=PL846hFPMqg3h4HpTVO8cPPHZnJIRA4I2p&index=3
 [link-window install]: https://www.youtube.com/watch?v=e_f9p-_JWZw&t=374s
-[link-tcp client]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/Network/TCP%20client.py
+[link-tcp client]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/Network/TCP%20client_loopback.py
 [link-Adafruit_io_mqtt]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/aio.py
 [link-Adafrui_io_http]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/http/aio_http.py
 [link-ping]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/Network/ping.py
