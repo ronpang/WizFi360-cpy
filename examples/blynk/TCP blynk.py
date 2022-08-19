@@ -7,26 +7,27 @@ from digitalio import Direction
 from adafruit_espatcontrol import adafruit_espatcontrol
 
 import struct
-import BlynkLib
-BLYNK_TEMPLATE_ID =  "TEMPLATE_ID"
+import BlynkLib # Same library as the python version
+#Input the related information after you have a blynk account
+BLYNK_TEMPLATE_ID =  "TEMPLATE_ID" 
 BLYNK_DEVICE_NAME = "DEVICE_NAME"
 BLYNK_AUTH_TOKEN = "AUTH_TOKEN"
 
-
-class Blynk(BlynkLib.BlynkProtocol):
+#Since BlynkLib has included the socket section for connection, it is needed to move to this section for connection and communication.
+class Blynk(BlynkLib.BlynkProtocol): #same as the library
     def __init__(self, auth, **kwargs):
         self.insecure = kwargs.pop('insecure', True)
         self.server = kwargs.pop('server', 'blynk.cloud')
         self.port = kwargs.pop('port', 80 if self.insecure else 443)
-        BlynkLib.BlynkProtocol.__init__(self, auth, **kwargs)
+        BlynkLib.BlynkProtocol.__init__(self, auth, **kwargs) 
         #self.on('redirect', self.redirect)
     
-    def _write(self, data):
+    def _write(self, data): #function to send data to blynk
         #print('<', data)
         esp.socket_send(data)
         # TODO: handle disconnect
     
-    def run(self):
+    def run(self): #run funcation and check data for collection.
         data = b''
         try:
             data = esp.socket_receive()
@@ -58,7 +59,7 @@ rtspin = False
 uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 #edit host and port to match server
 Dest_IP = "128.199.144.129" #bkynk.cloud
-Dest_PORT= 80
+Dest_PORT= 80 #TCP Port -> If SSL, please use 443
 
 print("ESP AT commands")
 # For Boards that do not have an rtspin like challenger_rp2040_wifi set rtspin to False.
@@ -95,18 +96,18 @@ while not esp.is_connected:
     continue
 
 
-esp.socket_connect("TCP",Dest_IP,Dest_PORT)
-blynk = Blynk(BLYNK_AUTH_TOKEN)
-counter = 0
+esp.socket_connect("TCP",Dest_IP,Dest_PORT) #TCP connection. If SSL, please change "TCP" to "SSL"
+blynk = Blynk(BLYNK_AUTH_TOKEN) #Open the class and connect to Blynk
+counter = 0 # Counter for posting information to Blynk
 
 # Register virtual pin handler
-@blynk.on("V5")
+@blynk.on("V5") #collect data from Blynk (Virtual Pin V5)
 def v5_write_handler(value):
-    print('Current slider value: {}'.format(value[0]))
+    print('Current slider value: {}'.format(value[0])) 
 
 while True:
     blynk.run()
     print("Adding counter: "+ str(counter))
-    blynk.virtual_write(4, str(counter))
+    blynk.virtual_write(4, str(counter)) #post counter data to virtual pin 4
     time.sleep(1)
     counter +=1
