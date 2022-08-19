@@ -68,6 +68,7 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 2. [Adafruit io (MQTT)][link-Adafruit_io_mqtt]
 3. [Adafruit io (HTTP)][link-Adafrui_io_http] - Used the same coding method as ESP AT control
 4. [Ping][link-ping]  - Used the same coding method as ESP AT control
+5. [Blynk][link-blynk]
 
 
 
@@ -86,3 +87,4 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 [link-ping]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/Network/ping.py
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
 [link-secret]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/secrets.py
+[link-blynk]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/blynk/TCP%20blynk.py
