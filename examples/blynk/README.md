@@ -1,4 +1,4 @@
-# Blynk
+# WizFi360-EVB-PICO (Blynk)
 This is a exmaple ussd WizFi360-EVB-PICO in Circuitpython to communicate with Blynk
 
 This example based on the python coding made from Blynk. (For the communication part, it shifted to the main code.)
