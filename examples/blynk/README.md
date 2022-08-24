@@ -77,7 +77,7 @@ while True:
 
 [link-aio]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/blynk/TCP%20blynk.py
 [link-secret]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/secrets.py
-[link-blynk_lib]: https://github.com/blynkkk/lib-python/blob/master/blynklib.py
+[link-blynk_lib]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/blynk/BlynkLib%20(modfied).py
 [link-linux install]: https://www.youtube.com/watch?v=onBkPkaqDnk&list=PL846hFPMqg3h4HpTVO8cPPHZnJIRA4I2p&index=3
 [link-window install]: https://www.youtube.com/watch?v=e_f9p-_JWZw&t=374s
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
