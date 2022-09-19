@@ -11,7 +11,7 @@ If you are interested on the codes and commands, please refer to the links below
 
 3.[WizFi360 Vs ESP8266][link-AT comparison]
 
-By using WIZnet Ethernet HAT with Raspberry Pi PICO, it required simple coding to create the communication method between PICO with Adafruit IO. 
+By using WIZnet's WizFi360-EVB-PICO, it required to use AT commands to control WizFi360 to communicate to the world 
 
 ## 📚Required Software
 ### Bundles:
