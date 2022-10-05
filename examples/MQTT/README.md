@@ -42,6 +42,7 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 ## 🔰MQTT conncection setup
 1. Required files: [aio.py][link-aio], [Secret.py][link-secret]
 2. Required commands:
+### Before the loop
 ```python
 #set the topics 
 wifi.topic_set("test","feed")
@@ -49,6 +50,26 @@ wifi.topic_set("test","feed")
 wifi.IO_topics("test")
 #Connect to adafruitio (please remember to set the above settings before connect to adafruit io)
 wifi.IO_Con("MQTT")
+```
+### Inside the loop
+```python
+while True:
+    #Collect information from subscribe channel (test)
+    data = wifi.MQTT_sub()
+    print (data)
+    # Split realted information to usable data
+    sub,result = wifi.clean_data(data,"test",result)
+    print (sub, result)
+    #publish to related channel (test)
+    wifi.MQTT_pub(str(counter))    
+    
+    counter += 1
+    time.sleep(0.5)
+    if counter > 5:
+        wifi.MQTT_disconnect() #disconnect with adafruit io
+        counter = 0
+        time.sleep(15)
+        wifi.IO_Con("MQTT") #reconnect with adafruit io
 ```
 ## ☑️Results
 ### Thonny (in debug mode)
