@@ -75,22 +75,10 @@ while True:
 ### Thonny (in debug mode)
 The result of the MQTT communicated with adafruit IO.
 
-Since it is in debug mode to the connecting details, it shows the secret information for connecting to the adafruit IO. 
-
-The results has been covered in different colors.
-
-🔵Blue: Adafruit IO username
-
-🔴Red: Adafruit IO password / key
-
 ![link-thonny_img]
 
 ### Adafruit IO 
 The results from Adafruit IO
-
-🔵Blue: Adafruit IO username
-
-🔴Red: Results
 
 ![link-adadfruit_img]
 
@@ -100,6 +88,6 @@ The results from Adafruit IO
 [link-linux install]: https://www.youtube.com/watch?v=onBkPkaqDnk&list=PL846hFPMqg3h4HpTVO8cPPHZnJIRA4I2p&index=3
 [link-window install]: https://www.youtube.com/watch?v=e_f9p-_JWZw&t=374s
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
-[link-thonny_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT.PNG
-[link-adadfruit_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/adafruit%20io%20recevied%20result%20(updated)-%20wizfi360%20-%20MQTT.PNG
+[link-thonny_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20(5-10-2022).PNG
+[link-adadfruit_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruit%20(5-10-2022).PNG
 [link-get start]: https://github.com/ronpang/RP2040-HAT-CircuitPython/blob/master/examples/Adafruit_IO/Getting%20Start%20Adafruit%20IO.md
