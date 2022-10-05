@@ -27,28 +27,45 @@ except ImportError:
 # Change the Debug Flag if you have issues with AT commands
 debugflag = False
 
-# Pins setup with WizFi360 through UART connection
-RX = board.GP5 #TX pin for WizFi360-EVB-PICO
-TX = board.GP4 #RX pin for WizFi360-EVB-PICO
-resetpin = DigitalInOut(board.GP20) #Reset pin for WizFi360-EVB-PICO
-rtspin = False #RTS pin
-uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048) #Serial settings
+
+RX = board.GP5
+TX = board.GP4
+resetpin = DigitalInOut(board.GP20)
+rtspin = False
+uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 status_light = None
 
+
 print("ESP AT commands")
-# For Boards that do not have an rtspin like WizFi360-EVB-PICO set rtspin to False.
 esp = adafruit_espatcontrol.ESP_ATcontrol(
     uart, 115200, reset_pin=resetpin, rts_pin=rtspin, debug=debugflag
 )
-wifi = adafruit_espatcontrol_wifimanager.ESPAT_WiFiManager(esp, secrets, status_light,attempts=5) #Class that handles HTTPs and MQTT (more information from lib)
+esp.hard_reset()
+wifi = adafruit_espatcontrol_wifimanager.ESPAT_WiFiManager(esp, secrets, status_light,attempts=5)
+
 
 counter = 0
-
+result = None #variable for cleaning data
+#set the topics 
+wifi.topic_set("test","feed")
+#select which topic that you wanted to publish
+wifi.IO_topics("test")
+#Connect to adafruitio (please remember to set the above settings before connect to adafruit io)
+wifi.IO_Con("MQTT")
 while True:
-    wifi.IO_Con("test","test","MQTT") #connect to adafruit io - publish topic name = "test", subscribe topic name = "test", protcol = MQTT
-    wifi.MQTT_pub(str(counter)) #publish data to "test"
-    data = wifi.MQTT_sub() #collect subscribed channel data from "test"
-    print (data) #print out the result
-    wifi.MQTT_disconnect() #disconnect with adafruit io
-    counter += 1   
-    time.sleep(15)
+    #Collect information from subscribe channel (test)
+    data = wifi.MQTT_sub()
+    print (data)
+    # Split related information to usable data
+    sub,result = wifi.clean_data(data,"test",result)
+    print (sub, result)
+    #publish to related channel (test)
+    wifi.MQTT_pub(str(counter))    
+    
+    counter += 1
+    time.sleep(0.5)
+    if counter > 5:
+        wifi.MQTT_disconnect() #disconnect with adafruit io
+        counter = 0
+        time.sleep(15)
+        wifi.IO_Con("MQTT") #reconnect with adafruit io
