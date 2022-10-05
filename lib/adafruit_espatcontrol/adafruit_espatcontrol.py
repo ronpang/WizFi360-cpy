@@ -211,7 +211,7 @@ class ESP_ATcontrol:
             + ","
             + str(keepalive)
         )
-        replies = self.at_response(cmd, timeout=25, retries=retries).split(b"\r\n") #added the timeout to 25s for SSL connection
+        replies = self.at_response(cmd, timeout=25, retries=retries).split(b"\r\n")
         print (replies[0])
         for reply in replies:
             if reply == b"CONNECT":
@@ -564,7 +564,7 @@ class ESP_ATcontrol:
                             break
                     if b"ERR CODE:" in response:
                         break
-                    if b"CLOSED\r\n" in response: #it is added for MQTT disconnect to have correct feedback.
+                    if b"CLOSED\r\n" in response:
                         break
                 else:
                     self.hw_flow(True)
@@ -578,7 +578,7 @@ class ESP_ATcontrol:
             if "AT+PING" in at_cmd and b"ERROR\r\n" in response:
                 return response
             # MQTT special case, if received MQTT closed means OK
-            if "AT+MQTTDIS" in at_cmd and b"CLOSED\r\n" in response: #correct response for handling MQTT disconnect
+            if "AT+MQTTDIS" in at_cmd and b"CLOSED\r\n" in response:
                 return response
             if response[-4:] != b"OK\r\n":
                 time.sleep(1)
