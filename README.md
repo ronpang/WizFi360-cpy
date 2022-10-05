@@ -1,7 +1,7 @@
 # WizFi360-EVB-Pico in Circuitpython (WizFi360 + RP2040)
 These code is based on Adafruit's circuitpython ESP AT control to modified. 
 
-WizFi360 Firmware version: 1.1.1.7
+WizFi360 Firmware version: 1.1.1.9
 
 If you are interested on the codes and commands, please refer to the links below.
 
@@ -11,7 +11,16 @@ If you are interested on the codes and commands, please refer to the links below
 
 3.[WizFi360 Vs ESP8266][link-AT comparison]
 
-By using WIZnet's WizFi360-EVB-PICO, it required to use AT commands to control WizFi360 to communicate to the world 
+By using WIZnet's WizFi360-EVB-PICO, it required to use AT commands to control WizFi360 to communicate to the world
+
+
+## :lotus_position_man: Upadtes
+
+### MQTT:
+
+1. Allow to change MQTT Publish topic after connected to adafruit IO
+2. Accept JSON method
+3. WizFi360 could accept Maximum 3 Subscribe topics
 
 ## 📚Required Software
 ### Bundles:
