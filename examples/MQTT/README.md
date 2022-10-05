@@ -43,17 +43,12 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 1. Required files: [aio.py][link-aio], [Secret.py][link-secret]
 2. Required commands:
 ```python
-# Connect to adafruit io - it used the secret from secret.py
-# Pubish topic: test , Subscribe topic: test , Mode: MQTT / MQTTS
-wifi.IO_Con("test","test","MQTT") 
-# Pubish data to the adafruit IO's Subscribe topic - test
-# data -> the data that you wanted to publish
-wifi.MQTT_pub(str(data)) #publish data
-# Collect data from the subscribed channel - test
-# data -> saved the data from the subscribed channel
-data = wifi.MQTT_sub() #collect subscribed channel data
-# Disconnect with adafruit io 
-wifi.MQTT_disconnect()
+#set the topics 
+wifi.topic_set("test","feed")
+#select which topic that you wanted to publish
+wifi.IO_topics("test")
+#Connect to adafruitio (please remember to set the above settings before connect to adafruit io)
+wifi.IO_Con("MQTT")
 ```
 ## ☑️Results
 ### Thonny (in debug mode)
