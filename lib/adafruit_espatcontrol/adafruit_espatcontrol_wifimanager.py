@@ -96,35 +96,117 @@ class ESPAT_WiFiManager:
             + '",60' #keep alive 60s
         )
         self._esp.at_response(cmd, timeout=10, retries=3)
+        
+    def topic_set (self,
+                   topic1: str,
+                   t1type: str,
+                   topic2: str = None,
+                   t2type: str = None,
+                   topic3: str = None,
+                   t3type: str = None,
+                   ) -> None:
+        """
+        Define all the topic types for MQTT setup for adafruitio
+        The topics will be fixed and it cannot add or substract during the connection with adafruitio
+        :param str topic1: First topic Name (Must included)
+        :param str topic2: Second topic Name
+        :param str topic3: Third topic Name
+        :param str t1type: First topic type (Must included)
+        :param str t2type: Second topic type
+        :param str t3type: Third topic type
+        """
+        self.topic1 = topic1
+        self.topic2 = topic2
+        self.topic3 = topic3
+        self.type1 = t1type
+        self.type2 = t2type
+        self.type3 = t3type   
     
-    def IO_topics(self, Pub_topic: str, Sub_topic: str) -> None:
+    def IO_topics (self, pub: str) -> None:
         """
-        Set MQTT topics for sub and pub
-        :param str Pub_topic: Publish channel topic name
-        :param str Sub_topic: Subscribe channel topic name
+        MQTT topic setup for connection.
+        Set MQTT topics for subcribe and publish
+        it will select the publish topic from pub
+        :param str pub: Publish topic
         """
+        if self.topic1 is pub:
+            pub = self.topic1
+            pub_t = self.type1
+        elif self.topic2 is pub:
+            pub = self.topic2
+            pub_t = self.type2
+        elif self.topic3 is pub: 
+            pub = self.topic3
+            pub_t = self.type3
+        
         cmd = (
-            'AT+MQTTTOPIC="'
-            + self.secrets["aio_username"] + '/feeds/'+ Pub_topic
-            + '","'
-            + self.secrets["aio_username"] + '/feeds/'+ Sub_topic
-            + '"'
-        )
+             'AT+MQTTTOPIC="'
+             + self.secrets["aio_username"]
+             )
+        if pub_t is "feed":
+            cmd = cmd + ('/feeds/' + pub
+                             + '","' + self.secrets["aio_username"] + '/feeds/'+ pub
+                             + '"'
+                             )
+        elif self.type1 is "group":
+            cmd = cmd + ('/groups/' + pub + '/json'
+                             + '","' + self.secrets["aio_username"] + '/groups/'+ pub + '/json'
+                             + '"'
+                             )
+        else:
+            raise RuntimeError("Publish type must be feed or group")
+        
+        if self.topic1 is not pub:
+            if self.type1 is "feed":
+                cmd = cmd + (',"' +self.secrets["aio_username"] + '/feeds/'+ self.topic1
+                             + '"'
+                            )
+            elif self.type1 is "group":
+                cmd = cmd + (',"' +self.secrets["aio_username"] + '/groups/'+ self.topic1 + '/json'
+                             + '"'
+                            )
+            else:
+                raise RuntimeError("Topic" + self.topic1 + "Type must be feed or group")
+        
+        if self.topic2 is not pub: 
+            if self.type2 is "feed":
+                cmd = cmd + (',"' +self.secrets["aio_username"] + '/feeds/'+ self.topic2
+                             + '"'
+                            )
+            elif self.type2 is "group":
+                cmd = cmd + (',"' +self.secrets["aio_username"] + '/groups/'+ self.topic2 + '/json'
+                             + '"'
+                            )   
+            elif self.type2 is None:
+                self._esp.at_response(cmd, timeout=10, retries=3)
+                return
+            else:
+                raise RuntimeError("Topic" + self.topic2 + "Type must be feed or group")
+            
+        if self.topic3 is not pub:
+            if self.type3 is "feed":
+                cmd = cmd + (',"' + self.secrets["aio_username"] + '/feeds/'+ self.topic3
+                             + '"'
+                            )
+            elif self.type3 is "group":
+                cmd = cmd + (',"' +self.secrets["aio_username"] + '/groups/'+ self.topic3 + '/json'
+                             + '"'
+                            )
+            elif self.type3 is None:
+                self._esp.at_response(cmd, timeout=10, retries=3)
+                return
+            else:
+                raise RuntimeError("Topic" + self.topic3 + "Type must be feed or group")
+        
         self._esp.at_response(cmd, timeout=10, retries=3)
-    
-    def IO_Con(self,
-        Pub_topic: str,
-        Sub_topic: str,
-        Mode: str
-        ) -> None:
+                
+    def IO_Con(self, Mode: str) -> None:
         """
-        Connnect to a MQTT server
-        :param str Pub_topic: Publish channel topic name (for IO_topics)
-        :param str Sub_topic: Subscribe channel topic name (for IO_topics)
-        :param str mode: MQTT mode or MQTTs mode (MQTT in SSL)
+        Connnect to a MQTT server (at least one Publish and one Subscribe channel)
+        Please set the topics before using this function
+        :param str mode: MQTT mode or MQTTS mode (MQTT in SSL)
         """
         self.IO_set()
-        self.IO_topics(Pub_topic,Sub_topic)
         if Mode == "MQTT":
             cmd_mode = "0"
             port = "1883"
@@ -141,7 +223,7 @@ class ESPAT_WiFiManager:
             + '",'
             + port
         )
-        self._esp.at_response(cmd, timeout=25, retries=3)
+        self._esp.at_response(cmd, timeout=10, retries=3)
     
     def MQTT_disconnect(self) -> None:
         """
@@ -154,7 +236,7 @@ class ESPAT_WiFiManager:
     def MQTT_pub(self, data: str) -> None:
         """
         Publish the data to MQTT server
-        :param str data: the data that you need to send to the MQTT server
+        
         """
         cmd = (
             'AT+MQTTPUB="'
@@ -163,10 +245,46 @@ class ESPAT_WiFiManager:
             )
         self._esp.at_response(cmd, timeout=10, retries=3)
         
-    def MQTT_sub (self, timeout: int = 5) -> None:
+    def IO_json(self,
+                topic1 :str,
+                data1: str,
+                topic2 :str = None,
+                data2: str = None,
+                topic3 :str = None,
+                data3: str = None
+                ) -> None:
+        """
+        Make the data in json format (max 3 topics)
+        param str topic1: first topic name
+        param str topic2: second topic name
+        param str topic3: third topic name
+        param str data1: first topic data
+        param str data2: second topic data
+        param str data3: third topic data
+        """
+        result = ('{"feeds": {"' #TODO - the logic is wrong, it needs to set the situaton for all kinds of topics 
+                + topic1 + '": "'
+                + data1  
+                )
+        if topic2 is not None:
+            result = result + ( '","'
+                    + topic2 + '": "'
+                    + data2 
+                    )
+        if topic3 is not None:
+            result = result + ('","'
+                    + topic3
+                    +'": "'
+                    + data3
+                    )
+        
+        result = result + ('"},"location": {"lat": 0.0,"lon": 0.0,"ele": 0.0}}')
+
+        return result
+    def MQTT_sub (self, timeout: int = 1) -> None:
         """
         Collect data from MQTT server
-        :param int timeout: Retry times for collecting subscribe data
+        
         """
         stamp = time.monotonic()
         result = b''
@@ -176,6 +294,68 @@ class ESPAT_WiFiManager:
                 result += temp
         return result
     
+    def clean_data(self,data, sub_title, fresult):
+        """
+        Collect the data from MQTT return message
+        a) Ability to determine is it a group topic or feed
+        b) It could collect data from Json or normal feed reutrn message
+        c) If the return message has seperate, it could wait until they have receive the whole message and collect the correct information
+        :param str data: Data collected from MQTT_sub
+        :param str sub_title: Subcribe topic that you wanted to collect. (MQTT or Group is okay) - > Group needs to include the internal topic (example: group.test)
+        :param str fresult: Return result (Receive the whole message from MQTT) or Uncomplete message (wait for combine to a complete message) 
+        """
+        if sub_title.find(".") >= 0:
+            group = sub_title.split(".") #checking the input is a group or a feed value - if group, split
+        else:
+            group = None #it is a feed
+        if str(data).find("b''") is -1: #check the data is it in byte
+            if str(data).rfind("\\r\\n") is len(str(data))-5: #check is it end of the input
+                # Combine and find the data
+                if group and fresult is not None and str(fresult).find(sub_title) >= 0:
+                    data = fresult + data #for combining to search feed
+                
+                result = data.splitlines() #remove all the next line 
+                if group is None: #if it is a feed input
+                    sub_loc = str(result).find(sub_title) #check is it inlcuded in the data
+            
+                    if  sub_loc >= 0: #if it is, 
+                        if str(result).find("/feeds/", sub_loc - 7) >= 0: #check is it inside a feed
+                            # Collect the Sub
+                            info = str(result).partition("/feeds/" + sub_title)
+                            S_info = info[1].partition(sub_title)
+                            Sub = S_info[1]
+                            # Collect the Data
+                            D_Tinfo = info[2].split(" -> ")
+                            D_Finfo = D_Tinfo[1].split("'")
+                            fresult = D_Finfo[0]
+                        else: Sub, fresult = None , None #Can't find the topic of your feed (other Topic in group used the same name)
+                
+                    else: Sub, fresult = None , None #Can't find the topic
+        
+                else: # if it is a group
+                    sub_loc = str(result).find(group[0]) #check is it included in the data
+                    if  sub_loc >= 0: #if it is,
+                        if str(result).find('/groups/', sub_loc - 8) >= 0: #check is it inside a group feed
+                            # Collect the Sub name
+                            info = str(result).partition("/groups/" + group[0])
+                            S_Tinfo = info[2].partition('"' + group[1] + '"')
+                            S_Finfo = S_Tinfo[1].split('"')
+                            Sub = S_Finfo[1]
+                            # Collect the Data
+                            D_Finfo = S_Tinfo[2].split('"')
+                            fresult = D_Finfo[1]
+                        else: Sub, fresult = None , None #Can't find the topic of your group (other Topic in feed used the same name)
+                    else: Sub, fresult = None , None #Can't find the topic
+            else: #if it is not the end of the line
+                Sub = None
+                if fresult is None: #first time to add
+                    fresult = data
+                else: #2nd time and afterwards
+                    fresult = fresult + data
+        else:
+            Sub, fresult = None , None
+
+        return Sub, fresult
     def get(self, url: str, **kw: Any) -> requests.Response:
         """
         Pass the Get request to requests and update Status NeoPixel
