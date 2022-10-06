@@ -22,6 +22,10 @@ By using WIZnet's WizFi360-EVB-PICO, it required to use AT commands to control W
 2. Accept JSON method
 3. WizFi360 could accept Maximum 3 Subscribe topics
 
+### Library:
+1. Added Firmware upgrade for WizFi360
+2. Added Read_UART - Directly collect UART message from WizFi360 without any modification (in byte format)
+
 ## 📚Required Software
 ### Bundles:
 1. [Circuit Python 7.0 or above][link-circuit python] (it required to use 1 MB from the flash) 
