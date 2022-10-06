@@ -43,7 +43,7 @@ rtspin = False
 uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 ```
 
-## 🔰MQTT conncection setup
+## 🔰HTTP conncection setup
 1. Required files: [aio.py][link-aio_http], [Secret.py][link-secret]
 2. Required commands:
 ```python
