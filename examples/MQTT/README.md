@@ -57,7 +57,7 @@ while True:
     #Collect information from subscribe channel (test)
     data = wifi.MQTT_sub()
     print (data)
-    # Split realted information to usable data
+    # find the data and the topic name from WizFi360 to further use.
     sub,result = wifi.clean_data(data,"test",result)
     print (sub, result)
     #publish to related channel (test)
