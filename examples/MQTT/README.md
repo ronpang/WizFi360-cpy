@@ -1,5 +1,8 @@
 # MQTT example
-This is a exmaple using WIZnet's WizFi360 MQTT commands to communicate adafruit IO.
+These are exmaples using WIZnet's WizFi360 MQTT commands to communicate adafruit IO.
+
+1. [Adafruit IO MQTT Single Topic](#MQTT1)
+2. [Adafruit IO MQTT Multiple Topic](#MQTT2)
 
 ## Getting start for Adafruit IO
 For applying an Adafruit account and how to use adafruit accounts, please refer to [Get start adafruit IO][link-get start]
@@ -39,6 +42,7 @@ rtspin = False
 uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 ```
 
+<a name="MQTT1"></a>
 ## 🔰MQTT Single Topic Conncection setup
 1. Required files: [aio.py][link-aio], [Secret.py][link-secret]
 2. Code explain:
@@ -82,6 +86,8 @@ The results from Adafruit IO
 
 ![link-adadfruit_img]
 
+
+<a name="MQTT2"></a>
 ## :dizzy: MQTT Multi Topic Connection Setup:
 1. Required files: [aio_change_to_group.py][link-change], [Secret.py][link-secret]
 2. Group writing format: Json
@@ -136,6 +142,25 @@ wifi.IO_Con("MQTT")
     
     time.sleep(1)
 ```
+## ☑️Results
+### Thonny 
+The result of the MQTT communicated with adafruit IO.
+
+![link-thonny_img_multi]
+
+### Adafruit IO 
+The results from Adafruit IO
+
+#### Test (feed)
+![link-aio_test]
+
+#### Testing.result (Group feed)
+![link-aio_result]
+
+#### Testing.counter (Group feed)
+![link-aio_counter]
+
+
 
 
 [link-aio]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/aio.py
@@ -147,3 +172,7 @@ wifi.IO_Con("MQTT")
 [link-adadfruit_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruit%20(5-10-2022).PNG
 [link-get start]: https://github.com/ronpang/RP2040-HAT-CircuitPython/blob/master/examples/Adafruit_IO/Getting%20Start%20Adafruit%20IO.md
 [link-change]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/aio_change_to_group.py
+[link-thonny_img_multi]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20Multi%20MQTT%20(6-10-2022).PNG
+[link-aio_test]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruitio%20-%20test%20(6-10-2022).PNG
+[link-aio_result]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruitio%20-%20result%20(6-10-2022).PNG
+[link-aio_counter]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruitio%20-%20counter%20(6-10-2022).PNG
