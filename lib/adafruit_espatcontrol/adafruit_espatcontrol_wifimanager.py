@@ -148,7 +148,7 @@ class ESPAT_WiFiManager:
                              + '","' + self.secrets["aio_username"] + '/feeds/'+ pub
                              + '"'
                              )
-        elif self.type1 is "group":
+        elif pub_t is "group":
             cmd = cmd + ('/groups/' + pub + '/json'
                              + '","' + self.secrets["aio_username"] + '/groups/'+ pub + '/json'
                              + '"'
