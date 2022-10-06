@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 # Note, you must create a feed called "test" in your AdafruitIO account.
+# Note 2, you must create a group called "tesing" in your Adafruit account that has "result" and "counter" feeds
 # Your secrets file must contain your aio_username and aio_key
 
 import time
@@ -58,37 +59,34 @@ while True:
     data = wifi.MQTT_sub()
     print (data)
     # Collect data from each subscribe topic
-    if counter < 6: 
+    if counter < 6: #Collect from feed -> "test"
         sub,result = wifi.clean_data(data,"test",result)        
-    elif counter >= 6 and counter < 11: 
+    elif counter >= 6 and counter < 11: #Collect from group -> "result" from "testing" group 
         sub,result = wifi.clean_data(data,"testing.result",result)
-    elif counter >= 11 and counter < 16:
+    elif counter >= 11 and counter < 16: #Collect from group -> "counter" from "testing" group 
         sub,result = wifi.clean_data(data,"testing.counter",result)
     print (sub, result)
     
     counter += 1
     #publish to related channel (test, testing.result, testing.counter)
-    if counter <= 5: 
+    if counter <= 5: #Publish feed -> "test"
         pub_data  = counter
-    elif counter > 5 and counter <= 10: 
+    elif counter > 5 and counter <= 10: #Publish to group -> "testing" 's feed "result"
         pub_data = wifi.IO_json('testing.result',str(counter))        
-    elif counter > 10 and counter <= 15: 
+    elif counter > 10 and counter <= 15: #Publish to group -> "testing" 's feed "counter"
         pub_data = wifi.IO_json('testing.counter',str(counter))
     wifi.MQTT_pub(str(pub_data))
     
+    # Change the topic from feed to group
     if counter is 5:
         wifi.IO_topics("testing")
+        
+    # Disconnecting with adafruit io
     elif counter is 16:
         wifi.MQTT_disconnect() #disconnect with adafruit io
         wifi.IO_topics("test")
         counter = 0
         time.sleep(15)
         wifi.IO_Con("MQTT") #reconnect with adafruit io
-
-    
+        
     time.sleep(1)
-
-    
-
-        
-        
