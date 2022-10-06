@@ -84,7 +84,8 @@ The results from Adafruit IO
 
 ## :dizzy: MQTT Multi Topic Connection Setup:
 1. Required files: [aio_change_to_group.py][link-change], [Secret.py][link-secret]
-2. Code explain:
+2. Group writing format: Json
+3. Code explain:
 
 ### Before the Loop:
 ```python
