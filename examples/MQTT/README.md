@@ -72,7 +72,7 @@ while True:
         wifi.IO_Con("MQTT") #reconnect with adafruit io
 ```
 ## ☑️Results
-### Thonny (in debug mode)
+### Thonny 
 The result of the MQTT communicated with adafruit IO.
 
 ![link-thonny_img]
