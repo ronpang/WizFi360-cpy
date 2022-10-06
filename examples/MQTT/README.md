@@ -39,9 +39,9 @@ rtspin = False
 uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 ```
 
-## 🔰MQTT conncection setup
+## 🔰MQTT Single Topic Conncection setup
 1. Required files: [aio.py][link-aio], [Secret.py][link-secret]
-2. Required commands:
+2. Code explain:
 ### Before the loop
 ```python
 #set the topics 
@@ -82,6 +82,60 @@ The results from Adafruit IO
 
 ![link-adadfruit_img]
 
+## :dizzy: MQTT Multi Topic Connection Setup:
+1. Required files: [aio_change_to_group.py][link-change], [Secret.py][link-secret]
+2. Code explain:
+
+### Before the Loop:
+```python
+#set the topics (test = feed) (testing = group -> included: result and counter)
+wifi.topic_set("test","feed","testing","group")
+#select which topic that you wanted to publish
+wifi.IO_topics("test")
+#Connect to adafruitio (please remember to set the above settings before connect to adafruit io)
+wifi.IO_Con("MQTT")
+```
+
+### Inside the Loop:
+```python
+    #Collect information from subscribe channel (test)
+    data = wifi.MQTT_sub()
+    print (data)
+    # Collect data from each subscribe topic
+    if counter < 6: #Collect from feed -> "test"
+        sub,result = wifi.clean_data(data,"test",result)        
+    elif counter >= 6 and counter < 11: #Collect from group -> "result" from "testing" group 
+        sub,result = wifi.clean_data(data,"testing.result",result)
+    elif counter >= 11 and counter < 16: #Collect from group -> "counter" from "testing" group 
+        sub,result = wifi.clean_data(data,"testing.counter",result)
+    print (sub, result)
+    
+    counter += 1
+    #publish to related channel (test, testing.result, testing.counter)
+    if counter <= 5: #Publish feed -> "test"
+        pub_data  = counter
+    elif counter > 5 and counter <= 10: #Publish to group -> "testing" 's feed "result"
+        pub_data = wifi.IO_json('testing.result',str(counter))        
+    elif counter > 10 and counter <= 15: #Publish to group -> "testing" 's feed "counter"
+        pub_data = wifi.IO_json('testing.counter',str(counter))
+    wifi.MQTT_pub(str(pub_data))
+    
+    # Change the topic from feed to group
+    if counter is 5:
+        wifi.IO_topics("testing")
+        
+    # Disconnecting with adafruit io
+    elif counter is 16:
+        wifi.MQTT_disconnect() #disconnect with adafruit io
+        wifi.IO_topics("test")
+        counter = 0
+        time.sleep(15)
+        wifi.IO_Con("MQTT") #reconnect with adafruit io
+
+    
+    time.sleep(1)
+```
+
 
 [link-aio]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/aio.py
 [link-secret]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/secrets.py
@@ -91,3 +145,4 @@ The results from Adafruit IO
 [link-thonny_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20(5-10-2022).PNG
 [link-adadfruit_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruit%20(5-10-2022).PNG
 [link-get start]: https://github.com/ronpang/RP2040-HAT-CircuitPython/blob/master/examples/Adafruit_IO/Getting%20Start%20Adafruit%20IO.md
+[link-change]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/aio_change_to_group.py
