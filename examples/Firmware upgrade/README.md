@@ -1,9 +1,6 @@
 # Firmware Upgrade
 
-It is a example code to allow WizFi360-EVB-PICO user to upgrade WizFi360's Firmware
-
-## Getting start for Adafruit IO
-For applying an Adafruit account and how to use adafruit accounts, please refer to [Get start adafruit IO][link-get start]
+It is a example code to allow WizFi360-EVB-PICO user to upgrade WizFi360's Firmware.
 
 ## 🤖 Basic Setup
 ### Step 1: How to install circuit Python into WizFi360-EVB-PICO (same method as adding to Raspberry Pi Pico)
@@ -60,5 +57,5 @@ The following are the results is in debug mode
 [link-linux install]: https://www.youtube.com/watch?v=onBkPkaqDnk&list=PL846hFPMqg3h4HpTVO8cPPHZnJIRA4I2p&index=3
 [link-window install]: https://www.youtube.com/watch?v=e_f9p-_JWZw&t=374s
 [link-lib_image]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/lib%20image.PNG
-[link-thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20HTTP.PNG
-[link-get start]: https://github.com/ronpang/RP2040-HAT-CircuitPython/blob/master/examples/Adafruit_IO/Getting%20Start%20Adafruit%20IO.md
+[link-thonny]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20firmware%20upgrade.PNG
+
