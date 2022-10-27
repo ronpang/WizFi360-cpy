@@ -206,6 +206,8 @@ class ESPAT_WiFiManager:
         Please set the topics before using this function
         :param str mode: MQTT mode or MQTTS mode (MQTT in SSL)
         """
+        if not self._esp.is_connected: #check is the wizfi360 is connected to a router.
+            self.connect()
         self.IO_set()
         if Mode == "MQTT":
             cmd_mode = "0"
