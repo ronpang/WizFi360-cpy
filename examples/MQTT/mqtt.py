@@ -66,7 +66,7 @@ while True:
     counter += 1
     time.sleep(1)
     if counter > 5:
-        wifi.MQTT_disconnect() #disconnect with adafruit io
+        wifi.MQTT_disconnect() #disconnect with Mosquitto
         counter = 0
         time.sleep(15)
         wifi.IO_Con("MQTT",ip = "10.0.1.74") #reconnect with moqsuitto
