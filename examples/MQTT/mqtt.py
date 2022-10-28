@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
 # SPDX-License-Identifier: MIT
 
-# Note, you must create a feed called "test" in your AdafruitIO account.
+# Note, you must create a feed called "test" in your Mosquitto.
 # Your secrets file must contain your aio_username and aio_key
 
 import time
