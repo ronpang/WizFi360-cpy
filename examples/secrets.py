@@ -9,6 +9,7 @@ secrets = {
     "password": "my password", #Router's (AP) password
     "timezone": -5,  # this is offset from UTC
     "github_token": "abcdefghij0123456789", 
-    "aio_username": "myusername", #user name for adafruit io
-    "aio_key": "abcdefghij0123456789", #key for adafruit io
+    "aio_username": "myusername", #user name for adafruit io / it could used for other MQTT server = User ID
+    "aio_key": "abcdefghij0123456789", #key for adafruit io / It could used for other MQTT server = Password
+    "client_id":"", #client_id for other MQTT server to use
 }
