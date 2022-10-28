@@ -207,7 +207,65 @@ The result of the MQTT communicated with Mosquitto.
 ### Thonny result 
 ![link-mosquitto_thonny_img]
 
+<a name="MQTT4"></a>
+## :nerd_face: Mosquito MQTT Multi Topic Connection Setup:
+1. Required files: [MQTT mulitple .py][link-mqtt(multi)], [Secret.py][link-secret]
+2. Mosquitto MQTT setup: [Youtube][link-youtube]
+3. Code explain:
 
+### Before the Loop:
+```python
+#set the topics 
+wifi.topic_set("test","feed","testing","feed","pump","feed")
+#select which topic that you wanted to publish
+wifi.IO_topics("test", aio_mode = False)
+#Connect to adafruitio (please remember to set the above settings before connect to adafruit io)
+wifi.IO_Con("MQTT", ip = "10.0.1.74")
+```
+### Inside the Loop:
+```python
+ #Collect information from subscribe channel (test)
+    data = wifi.MQTT_sub()
+    print (data)
+    # Collect data from each subscribe topic
+    if counter < 6: 
+        sub,result = wifi.clean_data(data,"test",result)        
+    elif counter >= 6 and counter < 11: 
+        sub,result = wifi.clean_data(data,"testing",result)
+    elif counter >= 11 and counter < 16:
+        sub,result = wifi.clean_data(data,"pump",result)
+    print (sub, result)
+    
+    counter += 1
+    #publish to related channel (test, testing.result, testing.counter)
+
+    wifi.MQTT_pub(str(counter))
+    
+    if counter is 5:
+        wifi.IO_topics("testing",aio_mode = False)
+    elif counter is 10:
+        wifi.IO_topics("pump",aio_mode = False)
+    elif counter is 16:
+        wifi.MQTT_disconnect() #disconnect with mosquitto
+        wifi.IO_topics("test",aio_mode = False)
+        counter = 0
+        time.sleep(15)
+        wifi.IO_Con("MQTT",ip = "10.0.1.74") #reconnect with mosquitto
+
+    
+    time.sleep(1)
+
+```
+
+## ☑️Results
+### Mosquitto result 
+The result of the MQTT communicated with Mosquitto.
+
+![link-mosquitto_img(multi)]
+
+
+### Thonny result 
+![link-mosquitto_thonny_img(multi)]
 
 [link-aio]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/aio.py
 [link-secret]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/secrets.py
@@ -226,3 +284,6 @@ The result of the MQTT communicated with Mosquitto.
 [link-youtube]: https://youtu.be/5TEvKznndKY
 [link-mosquitto_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/mosquitto%20result.png
 [link-mosquitto_thonny_img]:https://github.com/ronpang/WizFi360-cpy/blob/main/img/mosquitto%20result%20-%20thonny.png
+[link-mqtt(multi)]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/MQTT%20mulitple%20.py
+[link-mosquitto_img(multi)]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/mosquitto%20result%20(multi).png
+[link-mosquitto_thonny_img(multi)]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/mosquitto%20result%20-%20thonny%20(Multi).png
