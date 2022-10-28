@@ -3,6 +3,8 @@ These are exmaples using WIZnet's WizFi360 MQTT commands to communicate adafruit
 
 1. [Adafruit IO MQTT Single Topic](#MQTT1)
 2. [Adafruit IO MQTT Multiple Topic](#MQTT2)
+3. [Mosquitto MQTT Single Topic](#MQTT3)
+4. [Mosquitto MQTT Multiple Topic](#MQTT4)
 
 ## Getting start for Adafruit IO
 For applying an Adafruit account and how to use adafruit accounts, please refer to [Get start adafruit IO][link-get start]
@@ -43,7 +45,7 @@ uart = busio.UART(TX, RX, baudrate=11520, receiver_buffer_size=2048)
 ```
 
 <a name="MQTT1"></a>
-## 🔰MQTT Single Topic Conncection setup
+## 🔰Adafruit io MQTT Single Topic Conncection setup
 1. Required files: [aio.py][link-aio], [Secret.py][link-secret]
 2. Code explain:
 ### Before the loop
@@ -88,7 +90,7 @@ The results from Adafruit IO
 
 
 <a name="MQTT2"></a>
-## :dizzy: MQTT Multi Topic Connection Setup:
+## :dizzy: Adafruit io MQTT Multi Topic Connection Setup:
 1. Required files: [aio_change_to_group.py][link-change], [Secret.py][link-secret]
 2. Group writing format: Json
 3. Code explain:
@@ -160,6 +162,50 @@ The results from Adafruit IO
 #### Testing.counter (Group feed)
 ![link-aio_counter]
 
+<a name="MQTT3"></a>
+## :nerd_face: Mosquito MQTT Single Topic Connection Setup:
+1. Required files: [mqtt.py][link-mqtt], [Secret.py][link-secret]
+2. Mosquitto MQTT setup: [Youtube][link-youtube]
+3. Code explain:
+
+### Before the Loop:
+```python
+#set the topics 
+wifi.topic_set("test","feed")
+#select which topic that you wanted to publish
+wifi.IO_topics("test",aio_mode = False)
+#Connect to Mosquitto (please remember to set the above settings before connect to mosquitto)
+wifi.IO_Con("MQTT",ip = "10.0.1.74")
+```
+### Inside the Loop:
+```python
+    #Collect information from subscribe channel (test)
+    data = wifi.MQTT_sub()
+    print (data)
+    # Split related information to usable data
+    sub,result = wifi.clean_data(data,"test",result)
+    print (sub, result)
+    #publish to related channel (test)
+    wifi.MQTT_pub(str(counter))    
+    
+    counter += 1
+    time.sleep(1)
+    if counter > 5:
+        wifi.MQTT_disconnect() #disconnect with Mosquitto
+        counter = 0
+        time.sleep(15)
+        wifi.IO_Con("MQTT",ip = "10.0.1.74") #reconnect with moqsuitto
+```
+
+## ☑️Results
+### Mosquitto result 
+The result of the MQTT communicated with Mosquitto.
+
+![link-mosquitto_img]
+
+
+### Thonny result 
+![link-mosquitto_thonny_img]
 
 
 
@@ -176,3 +222,7 @@ The results from Adafruit IO
 [link-aio_test]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruitio%20-%20test%20(6-10-2022).PNG
 [link-aio_result]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruitio%20-%20result%20(6-10-2022).PNG
 [link-aio_counter]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/thonny%20result%20-%20wizfi360%20-%20MQTT%20-adafruitio%20-%20counter%20(6-10-2022).PNG
+[link-mqtt]: https://github.com/ronpang/WizFi360-cpy/blob/main/examples/MQTT/mqtt.py
+[link-youtube]: https://youtu.be/5TEvKznndKY
+[link-mosquitto_img]: https://github.com/ronpang/WizFi360-cpy/blob/main/img/mosquitto%20result.png
+[link-mosquitto_thonny_img]:https://github.com/ronpang/WizFi360-cpy/blob/main/img/mosquitto%20result%20-%20thonny.png
