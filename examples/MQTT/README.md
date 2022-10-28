@@ -208,7 +208,7 @@ The result of the MQTT communicated with Mosquitto.
 ![link-mosquitto_thonny_img]
 
 <a name="MQTT4"></a>
-## :nerd_face: Mosquito MQTT Multi Topic Connection Setup:
+## :skull: Mosquito MQTT Multi Topic Connection Setup:
 1. Required files: [MQTT mulitple .py][link-mqtt(multi)], [Secret.py][link-secret]
 2. Mosquitto MQTT setup: [Youtube][link-youtube]
 3. Code explain:
