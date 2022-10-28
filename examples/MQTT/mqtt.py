@@ -50,7 +50,7 @@ result = None #variable for cleaning data
 wifi.topic_set("test","feed")
 #select which topic that you wanted to publish
 wifi.IO_topics("test",aio_mode = False)
-#Connect to adafruitio (please remember to set the above settings before connect to adafruit io)
+#Connect to Mosquitto MQTT (please remember to set the above settings before connect to mosquitto MQTT)
 wifi.IO_Con("MQTT",ip = "10.0.1.74")
 while True:
     
